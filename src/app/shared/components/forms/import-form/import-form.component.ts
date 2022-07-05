@@ -69,10 +69,11 @@ export class ImportFormComponent implements OnInit
 
   public async onClickPasteToClipboard() : Promise<void>
   {
-    const { type, value } = await Clipboard.read();
+    const { value } = await Clipboard.read();
     if (!value)
       return this.toastManager.quickShow(this.translateService.instant('EMPTY_CLIPBOARD'), 'warning');
     this.formGroup.controls.content.setValue(value);
+    this.toastManager.quickShow(this.translateService.instant('PASTE_CARDS_SUCCESS'), 'primary');
   }
 
   public async onClickSubmit() : Promise<void>

@@ -64,6 +64,9 @@ export class CardBlockComponent implements OnInit
     };
     modalRef.result.then(async (info : { name : string, hexColor : string }) =>
     {
+      if (this.card.name === info.name && this.card.hexColor === info.hexColor)
+        return;
+
       // NOTE Update carte
       this.card.name     = info.name;
       this.card.hexColor = info.hexColor;

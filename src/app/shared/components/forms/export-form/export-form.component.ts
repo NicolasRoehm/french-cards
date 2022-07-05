@@ -1,17 +1,22 @@
 // Angular modules
-import { Component, Input }     from '@angular/core';
-import { EventEmitter }  from '@angular/core';
-import { Output }        from '@angular/core';
-import { OnInit }        from '@angular/core';
+import { Component }        from '@angular/core';
+import { Input }            from '@angular/core';
+import { EventEmitter }     from '@angular/core';
+import { Output }           from '@angular/core';
+import { OnInit }           from '@angular/core';
 
 // External modules
-import { Clipboard }     from '@capacitor/clipboard';
+import { Clipboard }        from '@capacitor/clipboard';
+import { TranslateService } from '@ngx-translate/core';
+
+// Internal modules
+import { ToastManager }     from '@blocks/toast/toast.manager';
 
 // Helpers
-import { StorageHelper } from '@helpers/storage.helper';
+import { StorageHelper }    from '@helpers/storage.helper';
 
 // Models
-import { Card }          from '@models/card.model';
+import { Card }             from '@models/card.model';
 
 @Component({
   selector    : 'app-export-form',
@@ -27,7 +32,11 @@ export class ExportFormComponent implements OnInit
   public isLoading : boolean = true;
   public cards     : Card[]  = [];
 
-  constructor() { }
+  constructor
+  (
+    private translateService : TranslateService,
+    private toastManager     : ToastManager,
+  ) { }
 
   // -------------------------------------------------------------------------------
   // ---- NOTE Init ----------------------------------------------------------------
@@ -46,6 +55,7 @@ export class ExportFormComponent implements OnInit
   public async onClickCopyToClipboard() : Promise<void>
   {
     await Clipboard.write({ string : JSON.stringify(this.cards) });
+    this.toastManager.quickShow(this.translateService.instant('COPY_CARDS_SUCCESS'), 'primary');
   }
 
   public onClickClose() : void

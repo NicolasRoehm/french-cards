@@ -1,38 +1,29 @@
-<div class="card mb-3">
+<div class="position-relative mb-3">
 
-  <!-- NOTE Header -->
-  <div class="card-header d-flex align-items-center justify-content-between">
-    <!-- NOTE Title -->
-    <strong>{{ card.name }}</strong>
+  <div class="ratio ratio-16x9" [style.--hs]="card.hslColor.h +','+ card.hslColor.s + '%'" [style.--l]="card.hslColor.l + '%'">
     <!-- NOTE Action -->
-    <span *ngIf="editMode">
+    <div class="actions text-end p-3" *ngIf="editMode">
       <button class="btn btn-sm btn-danger" (click)="onClickDelete()">
         <svg-icon [src]="'assets/img/icons/delete.svg'" [svgStyle]="{ 'fill': 'currentColor', 'width': '15px', 'height': '15px' }"></svg-icon>
       </button>
       <button class="btn btn-sm btn-primary ms-3" (click)="onClickEdit()">
         <svg-icon [src]="'assets/img/icons/edit.svg'" [svgStyle]="{ 'fill': 'currentColor', 'width': '15px', 'height': '15px' }"></svg-icon>
       </button>
-    </span>
-  </div>
-
-  <div class="card-body text-center position-relative">
-
-    <div class="ratio ratio-16x9" [style.--hs]="card.hslColor.h +','+ card.hslColor.s + '%'" [style.--l]="card.hslColor.l + '%'">
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <!-- NOTE Front -->
-          <div class="flip-card-front">
-            <div class="business-card d-flex justify-content-center align-items-center">
-              <h2>{{ card.name }}</h2>
-            </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <!-- NOTE Front -->
+        <div class="flip-card-front">
+          <div class="business-card d-flex justify-content-center align-items-center">
+            <h2>{{ card.name }}</h2>
           </div>
-          <!-- NOTE Back with barcode -->
-          <div class="flip-card-back d-flex align-items-center">
-            <ngx-barcode class="w-100" [bc-value]="card.id" [bc-display-value]="true" [bc-format]="card.format"></ngx-barcode>
-          </div>
+        </div>
+        <!-- NOTE Back with barcode -->
+        <div class="flip-card-back d-flex align-items-center">
+          <ngx-barcode class="w-100" [bc-value]="card.id" [bc-display-value]="true" [bc-format]="card.format"></ngx-barcode>
         </div>
       </div>
     </div>
-
   </div>
+
 </div>
