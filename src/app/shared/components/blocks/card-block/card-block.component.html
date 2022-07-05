@@ -6,11 +6,11 @@
     <strong>{{ card.name }}</strong>
     <!-- NOTE Action -->
     <span *ngIf="editMode">
-      <button class="btn btn-sm btn-primary" (click)="onClickEdit()">
-        <!-- TODO Icon -->
-      </button>
       <button class="btn btn-sm btn-danger" (click)="onClickDelete()">
-        <!-- TODO Icon -->
+        <svg-icon [src]="'assets/img/icons/delete.svg'" [svgStyle]="{ 'fill': 'currentColor', 'width': '15px', 'height': '15px' }"></svg-icon>
+      </button>
+      <button class="btn btn-sm btn-primary ms-3" (click)="onClickEdit()">
+        <svg-icon [src]="'assets/img/icons/edit.svg'" [svgStyle]="{ 'fill': 'currentColor', 'width': '15px', 'height': '15px' }"></svg-icon>
       </button>
     </span>
   </div>

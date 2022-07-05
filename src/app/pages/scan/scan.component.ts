@@ -93,6 +93,9 @@ export class ScanComponent implements OnInit, OnDestroy
     const cardId = result.content;
     const format = result.format;
 
+    // NOTE Close camera
+    await this.forceCloseCamera();
+
     this.openCardForm().then(async (info : { name : string, hexColor : string }) =>
     {
       const card = new Card({
@@ -101,9 +104,6 @@ export class ScanComponent implements OnInit, OnDestroy
         name     : info.name,
         hexColor : info.hexColor
       });
-
-      // NOTE Redirect to certificate
-      await this.forceCloseCamera();
 
       // NOTE Add card to storage
       StorageHelper.setCard(card);

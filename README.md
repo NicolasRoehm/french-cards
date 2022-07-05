@@ -1,5 +1,11 @@
 # AppOfCards Mobile
 
+## TODO
+- Import / Export
+- App favicon & splash + nav logo
+- Success message : toast
+- Add prev btn fix
+
 ## Build
 - **Update application version**
   - Change the `VERSION` value in [environment.enum.ts](src/app/shared/enums/environment.enum.ts)
