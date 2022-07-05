@@ -6,6 +6,20 @@
       <app-nav-block></app-nav-block>
     </div>
 
+    <!-- NOTE Placeholder -->
+    <ng-container *ngIf="isLoading">
+      <div class="card mb-3">
+        <div class="card-header">
+          <div class="mb-2 header-placeholder placeholder-glow" ><div class="placeholder"></div></div>
+        </div>
+        <div class="card-body">
+          <div class="ratio ratio-16x9">
+            <div class="body-placeholder placeholder-glow"><div class="placeholder"></div></div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
     <!-- NOTE Cards -->
     <ng-container *ngFor="let card of cards">
       <app-card-block [card]="card" [editMode]="editMode"></app-card-block>

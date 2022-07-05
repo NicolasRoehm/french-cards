@@ -1,5 +1,5 @@
 {
-  "name": "app-of-cards",
+  "name": "french-cards",
   "version": "3.0.0",
   "scripts": {
     "start": "npm run copy:local && ng serve -o --host 0.0.0.0 --disable-host-check",

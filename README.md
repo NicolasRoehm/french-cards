@@ -1,4 +1,4 @@
-# AppOfCards Mobile
+# FrenchCards Mobile
 
 ## TODO
 - App favicon & splash + nav logo

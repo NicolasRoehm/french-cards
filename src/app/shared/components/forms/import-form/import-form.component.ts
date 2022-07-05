@@ -56,7 +56,10 @@ export class ImportFormComponent implements OnInit
   private async initFormGroup() : Promise<void>
   {
     this.formGroup = new FormGroup({
-      content : new FormControl<string>('', { validators : Validators.required, nonNullable : true }),
+      content : new FormControl<string>({
+        value    : '',
+        disabled : true
+      }, { validators : Validators.required, nonNullable : true }),
     });
   }
 
@@ -74,6 +77,8 @@ export class ImportFormComponent implements OnInit
 
   public async onClickSubmit() : Promise<void>
   {
+    this.formSubmitLoading = true;
+
     const data  = this.formGroup.controls.content.getRawValue();
     const cards = ArrayTyper.asArray(Card, data);
 
@@ -96,6 +101,7 @@ export class ImportFormComponent implements OnInit
       this.toastManager.quickShow(this.translateService.instant('IMPORT_DUPLICATION') + names, 'warning');
     }
 
+    this.formSubmitLoading = false;
     this.submitClose.emit();
   }
 

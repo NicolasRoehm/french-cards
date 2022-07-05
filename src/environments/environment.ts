@@ -8,7 +8,7 @@ import { EnvName } from '@enums/environment.enum';
 export const environment = {
   production      : false,
   version         : EnvName.VERSION,
-  appName         : 'AppOfCards',
+  appName         : 'FrenchCards',
   envName         : EnvName.LOCAL,
   defaultLanguage : 'fr',
 };

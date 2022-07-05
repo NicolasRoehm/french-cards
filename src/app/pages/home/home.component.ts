@@ -15,8 +15,9 @@ import { Card }          from '@models/card.model';
 })
 export class HomeComponent implements OnInit
 {
-  public editMode : boolean = false;
-  public cards    : Card[]  = [];
+  public editMode  : boolean = false;
+  public isLoading : boolean = true;
+  public cards     : Card[]  = [];
 
   constructor
   (
@@ -33,7 +34,8 @@ export class HomeComponent implements OnInit
 
   private async initCards() : Promise<void>
   {
-    this.cards = await StorageHelper.getCards();
+    this.cards     = await StorageHelper.getCards();
+    this.isLoading = false;
   }
 
   // -------------------------------------------------------------------------------

@@ -7,7 +7,7 @@
 
   <div class="mb-3">
     <label for="content" class="form-label fw-bold text-start w-100">{{ 'CARDS_DATA' | translate }}</label>
-    <textarea class="form-control" id="content" required
+    <textarea class="form-control" id="content" required rows="10"
       formControlName="content"
       [ngClass]="{ 'is-invalid' : formGroup.controls.content.errors && formGroup.controls.content.touched }"></textarea>
     <!-- NOTE Errors -->
@@ -22,7 +22,7 @@
       {{ 'CLOSE' | translate }}
     </button>
     <button type="submit" class="btn btn-success ms-3"
-      [disabled]="!formGroup.valid || formGroup.pending || formSubmitLoading">
+      [disabled]="!formGroup.controls.content.value || formSubmitLoading">
       <ng-container *ngIf="!formSubmitLoading">
         {{ 'SAVE' | translate }}
       </ng-container>

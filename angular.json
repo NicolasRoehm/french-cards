@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AppOfCards": {
+    "FrenchCards": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app-of-cards",
+            "outputPath": "dist/french-cards",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -86,13 +86,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AppOfCards:build:production"
+              "browserTarget": "FrenchCards:build:production"
             },
             "staging": {
-              "browserTarget": "AppOfCards:build:staging"
+              "browserTarget": "FrenchCards:build:staging"
             },
             "development": {
-              "browserTarget": "AppOfCards:build:development"
+              "browserTarget": "FrenchCards:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -100,7 +100,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AppOfCards:build"
+            "browserTarget": "FrenchCards:build"
           }
         },
         "test": {

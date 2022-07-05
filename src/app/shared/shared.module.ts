@@ -14,7 +14,6 @@ import { ColorPickerModule }          from 'ngx-color-picker';
 
 // Components
 import { BackBtnComponent }           from '@blocks/back-btn/back-btn.component';
-import { HeaderBlockComponent }       from '@blocks/header-block/header-block.component';
 import { CardBlockComponent }         from '@blocks/card-block/card-block.component';
 import { NavBlockComponent }          from '@blocks/nav-block/nav-block.component';
 import { ToastComponent }             from '@blocks/toast/toast.component';
@@ -56,7 +55,6 @@ import { ModalWrapperDirective }     from '@directives/modal-wrapper.directive';
   [
     // Components
     BackBtnComponent,
-    HeaderBlockComponent,
     CardBlockComponent,
     NavBlockComponent,
     ToastComponent,
@@ -97,7 +95,6 @@ import { ModalWrapperDirective }     from '@directives/modal-wrapper.directive';
 
     // Components
     BackBtnComponent,
-    HeaderBlockComponent,
     CardBlockComponent,
     NavBlockComponent,
     ToastComponent,

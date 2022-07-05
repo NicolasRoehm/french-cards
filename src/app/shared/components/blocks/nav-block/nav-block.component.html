@@ -1,8 +1,8 @@
 <div class="list-group">
-  <a *ngIf="withHome" routerLink="/home" [routerLinkActive]="['active']" class="list-group-item list-group-item-action">
+  <!-- <a *ngIf="withHome" routerLink="/home" [routerLinkActive]="['active']" class="list-group-item list-group-item-action">
     <svg-icon class="me-3" [src]="'assets/img/icons/home.svg'" [svgStyle]="{ 'fill': 'currentColor', 'width': '24px' }"></svg-icon>
     {{ 'HOME' | translate }}
-  </a>
+  </a> -->
   <a routerLink="/scan" [routerLinkActive]="['active']" class="list-group-item list-group-item-action active">
     <svg-icon class="me-3" [src]="'assets/img/icons/barcode.svg'" [svgStyle]="{ 'fill': 'currentColor', 'width': '24px' }"></svg-icon>
     {{ 'SCAN_BARCODE' | translate }}
