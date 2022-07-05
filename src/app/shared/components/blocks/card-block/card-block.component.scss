@@ -1,0 +1,84 @@
+$radius: 15px;
+
+.business-card {
+
+  position: absolute;
+  height: 100%;
+  width:  100%;
+
+  background: var(--bc-bg-light);
+  border-radius: $radius;
+
+  h2 {
+    z-index: 1;
+    color: white;
+    margin: 0;
+  }
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+  }
+  &:before {
+    background: var(--bc-bg);
+    border-top-right-radius: $radius;
+    clip-path: polygon(20% 0, 100% 0, 100% 30%, 40% 70%);
+  }
+  &:after {
+    background: var(--bc-bg-dark);
+    border-bottom-right-radius: $radius;
+    clip-path: polygon(40% 70%, 100% 30%, 100% 100%, 48.5% 100%);
+  }
+}
+
+
+::ng-deep ngx-barcode svg {
+  width: 100%;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  --bc-bg:       hsl(var(--hs), var(--l));
+  --bc-bg-light: hsl(var(--hs), calc(var(--l) + 5%));
+  --bc-bg-dark:  hsl(var(--hs), calc(var(--l) - 5%));
+
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  border-radius: $radius;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+
+/* Style the back side */
+.flip-card-back {
+  background: var(--bc-bg);
+  color: white;
+  transform: rotateY(180deg);
+}

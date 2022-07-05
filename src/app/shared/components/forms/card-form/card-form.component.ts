@@ -16,12 +16,14 @@ import { Validators }   from '@angular/forms';
 export class CardFormComponent implements OnInit
 {
   @Input()  data        : any;
-  @Output() submitData  : EventEmitter<string> = new EventEmitter();
+  @Output() submitData  : EventEmitter<{ name : string, color : string }> = new EventEmitter();
   @Output() submitClose : EventEmitter<null>   = new EventEmitter();
 
   public formSubmitLoading : boolean = false;
   public formGroup !: FormGroup<{
-    name : FormControl<string>,
+    name      : FormControl<string>,
+    bgColor   : FormControl<string>,
+    textColor : FormControl<string>,
   }>;
 
   constructor() { }
@@ -38,7 +40,9 @@ export class CardFormComponent implements OnInit
   private async initFormGroup() : Promise<void>
   {
     this.formGroup = new FormGroup({
-      name : new FormControl<string>('', { validators : Validators.required, nonNullable : true }),
+      name      : new FormControl<string>('', { validators : Validators.required, nonNullable : true }),
+      bgColor   : new FormControl<string>('#0d6efd', { validators : Validators.required, nonNullable : true }),
+      textColor : new FormControl<string>('#ffffff', { validators : Validators.required, nonNullable : true }),
     });
   }
 
@@ -48,8 +52,9 @@ export class CardFormComponent implements OnInit
 
   public onClickSubmit()
   {
-    const name = this.formGroup.controls.name.getRawValue();
-    this.submitData.emit(name);
+    const name    = this.formGroup.controls.name.getRawValue();
+    const bgColor = this.formGroup.controls.bgColor.getRawValue();
+    this.submitData.emit({ name, color : bgColor });
   }
 
   public onClickClose()

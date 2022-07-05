@@ -10,6 +10,7 @@ import { TranslateModule }            from '@ngx-translate/core';
 import { AngularSvgIconModule }       from 'angular-svg-icon';
 import { NgbModule }                  from '@ng-bootstrap/ng-bootstrap';
 import { NgxBarcodeModule }           from 'ngx-barcode';
+import { ColorPickerModule }          from 'ngx-color-picker';
 
 // Components
 import { BackBtnComponent }           from '@blocks/back-btn/back-btn.component';
@@ -46,7 +47,8 @@ import { ModalWrapperDirective }     from '@directives/modal-wrapper.directive';
     TranslateModule,
     AngularSvgIconModule,
     NgbModule,
-    NgxBarcodeModule
+    NgxBarcodeModule,
+    ColorPickerModule,
   ],
   declarations    :
   [
@@ -87,6 +89,7 @@ import { ModalWrapperDirective }     from '@directives/modal-wrapper.directive';
     AngularSvgIconModule,
     NgbModule,
     NgxBarcodeModule,
+    ColorPickerModule,
 
     // Components
     BackBtnComponent,

@@ -6,7 +6,6 @@ import { Router }                from '@angular/router';
 
 // External modules
 import { BarcodeScanner }        from '@capacitor-community/barcode-scanner';
-import { SupportedFormat }       from '@capacitor-community/barcode-scanner';
 import { NgbModal }              from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService }      from '@ngx-translate/core';
 
@@ -94,12 +93,13 @@ export class ScanComponent implements OnInit, OnDestroy
     const cardId = result.content;
     const format = result.format;
 
-    this.openCardForm().then(async (cardName : string) =>
+    this.openCardForm().then(async (info : { name : string, color : string }) =>
     {
       const card = new Card({
-        id     : cardId,
-        format : format,
-        name   : cardName
+        id       : cardId,
+        format   : format,
+        name     : info.name,
+        hexColor : info.color
       });
 
       // NOTE Redirect to certificate
@@ -108,8 +108,9 @@ export class ScanComponent implements OnInit, OnDestroy
       // NOTE Add card to storage
       StorageHelper.setCard(card);
 
+      // TODO Success message
+
       this.router.navigate(['/home']);
-      // this.router.navigate(['/card'], { queryParams : { cardId, fromLink : '/scan' }});
     });
   }
 

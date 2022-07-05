@@ -1,8 +1,23 @@
-<div class="card">
+<div class="card mb-3">
   <div class="card-header">
     {{ card.name }}
   </div>
-  <div class="card-body">
-    <ngx-barcode [bc-value]="card.id" [bc-display-value]="true" [bc-format]="card.format"></ngx-barcode>
+  <div class="card-body text-center position-relative">
+
+    <div class="ratio ratio-16x9" [style.--hs]="card.hslColor.h +','+ card.hslColor.s + '%'" [style.--l]="card.hslColor.l + '%'">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="business-card d-flex justify-content-center align-items-center">
+              <h2>{{ card.name }}</h2>
+            </div>
+          </div>
+          <div class="flip-card-back d-flex align-items-center">
+            <ngx-barcode class="w-100" [bc-value]="card.id" [bc-display-value]="true" [bc-format]="card.format"></ngx-barcode>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

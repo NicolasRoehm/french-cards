@@ -31,11 +31,10 @@ export class StorageHelper
     const cardKeys   = keysResult.keys.filter((key) => key.startsWith(this.storagePrefix + StorageKey.CARD));
 
     const jsonCards : any[] = [];
-    for (const cardKey in cardKeys)
+    for (const cardKey of cardKeys)
       jsonCards.push(await this.getItem(cardKey, false));
 
-    const cards = ArrayTyper.asArray(Card, jsonCards);
-    return cards;
+    return ArrayTyper.asArray(Card, jsonCards);
   }
 
   public static async removeCard(id : string) : Promise<void>
