@@ -1,23 +1,28 @@
 // Angular modules
-import { Component }        from '@angular/core';
-import { OnInit }           from '@angular/core';
-import { OnDestroy }        from '@angular/core';
-import { Router }           from '@angular/router';
+import { Component }             from '@angular/core';
+import { OnInit }                from '@angular/core';
+import { OnDestroy }             from '@angular/core';
+import { Router }                from '@angular/router';
 
 // External modules
-import { BarcodeScanner }   from '@capacitor-community/barcode-scanner';
-import { SupportedFormat }  from '@capacitor-community/barcode-scanner';
-import { TranslateService } from '@ngx-translate/core';
+import { BarcodeScanner }        from '@capacitor-community/barcode-scanner';
+import { SupportedFormat }       from '@capacitor-community/barcode-scanner';
+import { NgbModal }              from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService }      from '@ngx-translate/core';
 
 // Internal modules
-import { ToastManager }     from '@blocks/toast/toast.manager';
+import { ToastManager }          from '@blocks/toast/toast.manager';
 
 // Helpers
-import { PermissionHelper } from '@helpers/permission.helper';
-import { StorageHelper }    from '@helpers/storage.helper';
+import { PermissionHelper }      from '@helpers/permission.helper';
+import { StorageHelper }         from '@helpers/storage.helper';
 
 // Models
-import { Card }             from '@models/card.model';
+import { Card }                  from '@models/card.model';
+
+// Components
+import { CardFormComponent }     from '@forms/card-form/card-form.component';
+import { ModalWrapperComponent } from '@modals/modal-wrapper/modal-wrapper.component';
 
 @Component({
   selector    : 'app-scan',
@@ -33,7 +38,8 @@ export class ScanComponent implements OnInit, OnDestroy
   (
     private router           : Router,
     private translateService : TranslateService,
-    private toastManager     : ToastManager
+    private toastManager     : ToastManager,
+    private ngbModal         : NgbModal,
   )
   { }
 
@@ -88,13 +94,16 @@ export class ScanComponent implements OnInit, OnDestroy
     const cardId = result.content;
     // console.log(result.content)
 
-    // TODO Generate barcode
+    this.openCardForm().then(async _ =>
+    {
+      // TODO Generate barcode
 
-    // NOTE Redirect to certificate
-    await this.forceCloseCamera();
-    // NOTE Add search to history
-    StorageHelper.addCard(new Card({}));
-    this.router.navigate(['/card'], { queryParams : { cardId, fromLink : '/scan' }});
+      // NOTE Redirect to certificate
+      await this.forceCloseCamera();
+      // NOTE Add search to history
+      StorageHelper.addCard(new Card({}));
+      this.router.navigate(['/card'], { queryParams : { cardId, fromLink : '/scan' }});
+    });
   }
 
   private async forceCloseCamera() : Promise<void>
@@ -120,6 +129,17 @@ export class ScanComponent implements OnInit, OnDestroy
   {
     this.toastManager.quickShow(this.translateService.instant(message));
     await this.forceCloseCamera();
+  }
+
+  private openCardForm() : Promise<any>
+  {
+    const modalRef = this.ngbModal.open(ModalWrapperComponent, { centered : true, backdrop : 'static', size: 'lg'});
+    modalRef.componentInstance.component     = CardFormComponent;
+    modalRef.componentInstance.componentData = {  };
+    modalRef.componentInstance.modalData     = {
+      title : this.translateService.instant('CARD')
+    };
+    return modalRef.result;
   }
 
   // -------------------------------------------------------------------------------

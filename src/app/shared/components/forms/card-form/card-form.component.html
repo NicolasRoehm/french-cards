@@ -1,0 +1,31 @@
+<!-- NOTE User form -->
+<form [formGroup]="formGroup" (ngSubmit)="onClickSubmit()" autocomplete="off">
+
+  <div class="mb-3">
+    <label for="name" class="form-label fw-bold text-start w-100">{{ 'NAME' | translate }}</label>
+    <input type="text" class="form-control" id="name" required
+      formControlName="name"
+      [ngClass]="{ 'is-invalid' : formGroup.controls.name.errors && formGroup.controls.name.touched }">
+    <!-- NOTE Errors -->
+    <div class="invalid-feedback" *ngIf="formGroup.controls.name.hasError('required')">
+      {{ 'FIELD_REQUIRED' | translate }}
+    </div>
+  </div>
+
+  <!-- NOTE Submit -->
+  <div class="text-center mt-3">
+    <button type="button" class="btn btn-light" (click)="onClickClose()" [disabled]="formSubmitLoading">
+      {{ 'CLOSE' | translate }}
+    </button>
+    <button type="submit" class="btn btn-success ms-3"
+      [disabled]="!formGroup.valid || formGroup.pending || formSubmitLoading">
+      <ng-container *ngIf="!formSubmitLoading">
+        {{ 'SAVE' | translate }}
+      </ng-container>
+      <ng-container *ngIf="formSubmitLoading">
+        <span class="spinner-grow spinner-grow-sm align-middle" role="status" aria-hidden="true"></span>
+        <span class="ms-1 align-middle">{{ 'LOADING' | translate }}</span>
+      </ng-container>
+    </button>
+  </div>
+</form>
