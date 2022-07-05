@@ -13,11 +13,6 @@ const routes : Routes = [
     canLoad      : [ ],
   },
   {
-    path         : 'card',
-    loadChildren : () => import('./pages/card/card.module').then(m => m.CardModule),
-    canLoad      : [ ],
-  },
-  {
     path         : 'scan',
     loadChildren : () => import('./pages/scan/scan.module').then(m => m.ScanModule),
     canLoad      : [ ],

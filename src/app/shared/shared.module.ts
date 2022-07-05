@@ -21,6 +21,8 @@ import { ToastComponent }             from '@blocks/toast/toast.component';
 import { ProgressBarComponent }       from '@blocks/progress-bar/progress-bar.component';
 
 // Forms
+import { ExportFormComponent }        from '@forms/export-form/export-form.component';
+import { ImportFormComponent }        from '@forms/import-form/import-form.component';
 import { CardFormComponent }          from '@forms/card-form/card-form.component';
 import { FormConfirmComponent }       from '@forms/form-confirm/form-confirm.component';
 
@@ -65,6 +67,8 @@ import { ModalWrapperDirective }     from '@directives/modal-wrapper.directive';
     PageLayoutComponent,
 
     // Forms
+    ExportFormComponent,
+    ImportFormComponent,
     CardFormComponent,
     FormConfirmComponent,
 
@@ -104,6 +108,8 @@ import { ModalWrapperDirective }     from '@directives/modal-wrapper.directive';
     PageLayoutComponent,
 
     // Forms
+    ExportFormComponent,
+    ImportFormComponent,
     CardFormComponent,
     FormConfirmComponent,
 

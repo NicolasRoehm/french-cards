@@ -1,10 +1,7 @@
 # AppOfCards Mobile
 
 ## TODO
-- Import / Export
 - App favicon & splash + nav logo
-- Success message : toast
-- Add prev btn fix
 
 ## Build
 - **Update application version**

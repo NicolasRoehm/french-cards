@@ -68,9 +68,11 @@ export class CardBlockComponent implements OnInit
       this.card.name     = info.name;
       this.card.hexColor = info.hexColor;
       this.card.hslColor = StringHelper.hexToHSL(this.card.hexColor);
-
+      // NOTE Save card
       await StorageHelper.setCard(this.card);
-    });
+
+      this.toastManager.quickShow(this.translateService.instant('EDIT_CARD_SUCCESS'), 'success');
+    }, () => { /* do nothing */ });
   }
 
   public async onClickDelete() : Promise<void>
@@ -86,10 +88,13 @@ export class CardBlockComponent implements OnInit
     {
       if (!submit)
         return;
-      // NOTE Delete card & component
+      // NOTE Delete card
       await StorageHelper.removeCard(this.card.id);
+      // NOTE Delete component
       this.viewContainerRef.element.nativeElement.parentElement.removeChild(this.viewContainerRef.element.nativeElement);
-    });
+
+      this.toastManager.quickShow(this.translateService.instant('DELETE_CARD_SUCCESS'), 'success');
+    }, () => { /* do nothing */ });
   }
 
   // -------------------------------------------------------------------------------

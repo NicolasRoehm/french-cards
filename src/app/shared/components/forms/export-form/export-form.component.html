@@ -1,0 +1,14 @@
+<app-progress-bar *ngIf="isLoading"></app-progress-bar>
+
+<div class="text-center "*ngIf="!isLoading">
+  <button type="button" class="btn btn-success mb-3" (click)="onClickCopyToClipboard()">{{ 'COPY_CARDS' | translate }}</button>
+  <label for="content" class="form-label fw-bold text-start w-100">{{ 'CARDS_DATA' | translate }}</label>
+  <textarea class="form-control" rows="10" id="content" disabled>{{ cards | json }}</textarea>
+</div>
+
+<!-- NOTE Close -->
+<div class="text-center mt-3">
+  <button type="button" class="btn btn-light" (click)="onClickClose()">
+    {{ 'CLOSE' | translate }}
+  </button>
+</div>

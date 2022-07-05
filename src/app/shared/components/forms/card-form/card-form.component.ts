@@ -61,9 +61,9 @@ export class CardFormComponent implements OnInit
     this.submitData.emit({ name, hexColor });
   }
 
-  public onClickClose()
+  public onClickClose() : void
   {
-
+    this.submitClose.emit();
   }
 
   // -------------------------------------------------------------------------------

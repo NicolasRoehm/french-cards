@@ -4,6 +4,7 @@
   "HOME"                   : "Home",
   "VERSION"                : "Version",
   "LOADING"                : "Loading",
+  "FIELD_REQUIRED"         : "This field is required",
   "SCANNER_CAM_PERMISSION" : "Scanner requires camera permission",
   "START_SCANNING"         : "Start scanning",
   "STOP_SCANNING"          : "Stop scanning"

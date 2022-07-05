@@ -7,4 +7,12 @@
     <svg-icon class="me-3" [src]="'assets/img/icons/barcode.svg'" [svgStyle]="{ 'fill': 'currentColor', 'width': '24px' }"></svg-icon>
     {{ 'SCAN_BARCODE' | translate }}
   </a>
+  <button type="button" (click)="onClickExport()" class="list-group-item list-group-item-action">
+    <svg-icon class="me-3" [src]="'assets/img/icons/export.svg'" [svgStyle]="{ 'fill': 'currentColor', 'width': '24px' }"></svg-icon>
+    {{ 'EXPORT_CARDS' | translate }}
+  </button>
+  <button type="button" (click)="onClickImport()" class="list-group-item list-group-item-action">
+    <svg-icon class="me-3" [src]="'assets/img/icons/import.svg'" [svgStyle]="{ 'fill': 'currentColor', 'width': '24px' }"></svg-icon>
+    {{ 'IMPORT_CARDS' | translate }}
+  </button>
 </div>

@@ -1,32 +1,33 @@
 // Angular modules
-import { Component }      from '@angular/core';
-import { OnInit }         from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input }     from '@angular/core';
+import { EventEmitter }  from '@angular/core';
+import { Output }        from '@angular/core';
+import { OnInit }        from '@angular/core';
+
+// External modules
+import { Clipboard }     from '@capacitor/clipboard';
+
+// Helpers
 import { StorageHelper } from '@helpers/storage.helper';
 
 // Models
-import { Card }           from '@models/card.model';
+import { Card }          from '@models/card.model';
 
 @Component({
-  selector    : 'app-card',
-  templateUrl : './card.component.html',
-  styleUrls   : ['./card.component.scss']
+  selector    : 'app-export-form',
+  templateUrl : './export-form.component.html',
+  styleUrls   : ['./export-form.component.scss']
 })
-export class CardComponent implements OnInit
+export class ExportFormComponent implements OnInit
 {
-  public isLoading  : boolean = true;
-  public cardId    !: string;
-  public card      ?: Card | null;
+  @Input()  data        : undefined;
+  @Output() submitData  : EventEmitter<null> = new EventEmitter();
+  @Output() submitClose : EventEmitter<null> = new EventEmitter();
 
-  constructor(private activatedRoute : ActivatedRoute)
-  {
-    // NOTE Get query parameters
-    this.activatedRoute.queryParams.subscribe(async params =>
-    {
-      this.cardId = params['cardId'];
-      this.initCard();
-    });
-  }
+  public isLoading : boolean = true;
+  public cards     : Card[]  = [];
+
+  constructor() { }
 
   // -------------------------------------------------------------------------------
   // ---- NOTE Init ----------------------------------------------------------------
@@ -34,19 +35,23 @@ export class CardComponent implements OnInit
 
   public async ngOnInit() : Promise<void>
   {
-
-  }
-
-  private async initCard() : Promise<void>
-  {
-    const card     = await StorageHelper.getCard(this.cardId);
+    this.cards     = await StorageHelper.getCards();
     this.isLoading = false;
-    this.card      = card;
   }
 
   // -------------------------------------------------------------------------------
   // ---- NOTE Actions -------------------------------------------------------------
   // -------------------------------------------------------------------------------
+
+  public async onClickCopyToClipboard() : Promise<void>
+  {
+    await Clipboard.write({ string : JSON.stringify(this.cards) });
+  }
+
+  public onClickClose() : void
+  {
+    this.submitClose.emit();
+  }
 
   // -------------------------------------------------------------------------------
   // ---- NOTE Computed props ------------------------------------------------------

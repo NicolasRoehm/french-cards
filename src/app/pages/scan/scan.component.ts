@@ -88,7 +88,7 @@ export class ScanComponent implements OnInit, OnDestroy
     // NOTE Start scanning and wait for a result
     const result = await BarcodeScanner.startScan({ targetedFormats : [ ] });
     if (!result.hasContent || !result.content)
-      return;
+      return this.toastManager.quickShow(this.translateService.instant('SCAN_ERROR'));
 
     const cardId = result.content;
     const format = result.format;
@@ -108,8 +108,8 @@ export class ScanComponent implements OnInit, OnDestroy
       // NOTE Add card to storage
       StorageHelper.setCard(card);
 
-      // TODO Success message
-
+      // NOTE Success message
+      this.toastManager.quickShow(this.translateService.instant('ADD_CARD_SUCCESS'), 'success');
       this.router.navigate(['/home']);
     });
   }
@@ -141,7 +141,7 @@ export class ScanComponent implements OnInit, OnDestroy
 
   private openCardForm() : Promise<any>
   {
-    const modalRef = this.ngbModal.open(ModalWrapperComponent, { centered : true, backdrop : 'static', size: 'lg'});
+    const modalRef = this.ngbModal.open(ModalWrapperComponent, { centered : true, backdrop : 'static' });
     modalRef.componentInstance.component     = CardFormComponent;
     modalRef.componentInstance.componentData = { };
     modalRef.componentInstance.modalData     = {

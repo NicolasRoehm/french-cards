@@ -14,7 +14,11 @@
 
   <div class="mb-3">
     <label for="hexColor" class="form-label fw-bold text-start w-100">{{ 'COLOR' | translate }}</label>
-    <input class="form-control" [style.background]="formGroup.controls.hexColor.value" [colorPicker]="formGroup.controls.hexColor.value" (colorPickerChange)="formGroup.controls.hexColor.setValue($event)"/>
+    <input class="form-control"
+      [ngClass]="{ 'is-invalid' : formGroup.controls.hexColor.errors && formGroup.controls.hexColor.touched }"
+      [style.background]="formGroup.controls.hexColor.value"
+      [colorPicker]="formGroup.controls.hexColor.value"
+      (colorPickerChange)="formGroup.controls.hexColor.setValue($event)"/>
     <!-- NOTE Errors -->
     <div class="invalid-feedback" *ngIf="formGroup.controls.hexColor.hasError('required')">
       {{ 'FIELD_REQUIRED' | translate }}
