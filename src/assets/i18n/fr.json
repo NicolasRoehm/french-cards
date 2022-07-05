@@ -1,7 +1,10 @@
 {
-  "NOT_FOUND"      : "404 - Page non trouvée",
-  "GO_TO_HOMEPAGE" : "Retour à l'accueil",
-  "HOME"           : "Accueil",
-  "VERSION"        : "Version",
-  "LOADING"        : "Chargement"
+  "NOT_FOUND"              : "404 - Page non trouvée",
+  "GO_TO_HOMEPAGE"         : "Retour à l'accueil",
+  "HOME"                   : "Accueil",
+  "VERSION"                : "Version",
+  "LOADING"                : "Chargement",
+  "SCANNER_CAM_PERMISSION" : "Scanner requiert la permission de camera",
+  "START_SCANNING"         : "Démarrer le scan",
+  "STOP_SCANNING"          : "Arrêter le scanning"
 }

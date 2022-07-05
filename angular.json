@@ -95,10 +95,6 @@
               "browserTarget": "AppOfCards:build:development"
             }
           },
-          "options": {
-            "browserTarget": "frontend:build",
-            "proxyConfig": "proxy.conf.json"
-          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {

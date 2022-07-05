@@ -1,32 +1,39 @@
 // Angular modules
-import { Component }       from '@angular/core';
-import { OnDestroy }       from '@angular/core';
-import { OnInit }          from '@angular/core';
+import { Component }     from '@angular/core';
+import { OnInit }        from '@angular/core';
+
+// Helpers
+import { StorageHelper } from '@helpers/storage.helper';
+
+// Models
+import { Card }          from '@models/card.model';
 
 @Component({
   selector    : 'app-home',
   templateUrl : './home.component.html',
   styleUrls   : ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy
+export class HomeComponent implements OnInit
 {
+  public cards : Card[] = [];
+
   constructor
   (
   ) { }
 
   public async ngOnInit() : Promise<void>
   {
-
-  }
-
-  public ngOnDestroy() : void
-  {
-
+    await this.initCards();
   }
 
   // -------------------------------------------------------------------------------
   // ---- NOTE Init ----------------------------------------------------------------
   // -------------------------------------------------------------------------------
+
+  private async initCards() : Promise<void>
+  {
+    this.cards = await StorageHelper.getCards();
+  }
 
   // -------------------------------------------------------------------------------
   // ---- NOTE Actions -------------------------------------------------------------

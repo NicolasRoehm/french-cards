@@ -1,6 +1,12 @@
 <app-page-layout>
   <div class="container my-3">
 
+    <!-- NOTE Navigation -->
+    <app-nav-block></app-nav-block>
+
+    <ng-container *ngFor="let card of cards">
+      <app-card-block [card]="card"></app-card-block>
+    </ng-container>
 
   </div>
 </app-page-layout>

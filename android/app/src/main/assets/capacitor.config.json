@@ -4,7 +4,7 @@
 	"webDir": "dist/app-of-cards",
 	"bundledWebRuntime": false,
 	"server": {
-		"cleartext": true,
-		"androidScheme": "https"
+		"url": "http://192.168.0.2:4200",
+		"cleartext": true
 	}
 }
