@@ -1,0 +1,18 @@
+<app-page-layout>
+  <app-header-block title="SCAN_QR_CODE" icon="qr-code.svg"></app-header-block>
+  <app-back-btn></app-back-btn>
+  <div class="container mb-3">
+
+    <div class="scan-block" *ngIf="isScanning"></div>
+
+    <div class="text-center" *ngIf="hasPermission === false">
+      {{ 'SCANNER_CAM_PERMISSION' | translate }}
+    </div>
+
+    <button class="scanner-btn btn" [ngClass]="{ 'btn-secondary' : !hasPermission, 'btn-success' : !isScanning && hasPermission, 'btn-danger' : isScanning }" type="button" (click)="onClickToggleCamera()" [disabled]="!hasPermission">
+      <ng-container *ngIf="!isScanning">{{ 'START_SCANNING' | translate }}</ng-container>
+      <ng-container *ngIf="isScanning">{{ 'STOP_SCANNING' | translate }}</ng-container>
+    </button>
+
+  </div>
+</app-page-layout>

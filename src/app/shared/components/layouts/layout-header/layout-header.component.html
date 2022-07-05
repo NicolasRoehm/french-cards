@@ -1,0 +1,25 @@
+<!-- NOTE Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary py-1">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" [routerLink]="['/home']">
+      <span class="align-middle">App of Cards</span>
+    </a>
+    <button class="navbar-toggler d-block" type="button" (click)="onClickOffcanvas(content)">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- NOTE Offcanvas -->
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-body">
+    <div class="text-center text-primary">
+      <h4 class="mt-2 mb-3">App of Cards</h4>
+      <!-- <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss()"></button> -->
+    </div>
+
+  </div>
+</ng-template>
+
+<!-- NOTE Content -->
+<ng-content></ng-content>
