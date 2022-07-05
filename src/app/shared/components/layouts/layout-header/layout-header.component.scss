@@ -1,5 +1,7 @@
 .navbar {
   z-index: 11;
+  background: rgb(18,39,127);
+  background: linear-gradient(180deg, rgba(18,39,127,1) 0%, rgba(0,97,253,1) 100%);
   .navbar-brand {
     img {
       width: 30px;
