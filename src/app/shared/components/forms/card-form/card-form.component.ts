@@ -8,6 +8,9 @@ import { FormControl }  from '@angular/forms';
 import { FormGroup }    from '@angular/forms';
 import { Validators }   from '@angular/forms';
 
+// Models
+import { Card }         from '@models/card.model';
+
 @Component({
   selector    : 'app-card-form',
   templateUrl : './card-form.component.html',
@@ -15,15 +18,14 @@ import { Validators }   from '@angular/forms';
 })
 export class CardFormComponent implements OnInit
 {
-  @Input()  data        : any;
-  @Output() submitData  : EventEmitter<{ name : string, color : string }> = new EventEmitter();
+  @Input()  data       !: Card | void;
+  @Output() submitData  : EventEmitter<{ name : string, hexColor : string }> = new EventEmitter();
   @Output() submitClose : EventEmitter<null>   = new EventEmitter();
 
   public formSubmitLoading : boolean = false;
   public formGroup !: FormGroup<{
-    name      : FormControl<string>,
-    bgColor   : FormControl<string>,
-    textColor : FormControl<string>,
+    name     : FormControl<string>,
+    hexColor : FormControl<string>,
   }>;
 
   constructor() { }
@@ -39,10 +41,12 @@ export class CardFormComponent implements OnInit
 
   private async initFormGroup() : Promise<void>
   {
+    const name     = this.data ? this.data.name     : '';
+    const hexColor = this.data ? this.data.hexColor : '#0d6efd';
+
     this.formGroup = new FormGroup({
-      name      : new FormControl<string>('', { validators : Validators.required, nonNullable : true }),
-      bgColor   : new FormControl<string>('#0d6efd', { validators : Validators.required, nonNullable : true }),
-      textColor : new FormControl<string>('#ffffff', { validators : Validators.required, nonNullable : true }),
+      name     : new FormControl<string>(name,     { validators : Validators.required, nonNullable : true }),
+      hexColor : new FormControl<string>(hexColor, { validators : Validators.required, nonNullable : true }),
     });
   }
 
@@ -52,9 +56,9 @@ export class CardFormComponent implements OnInit
 
   public onClickSubmit()
   {
-    const name    = this.formGroup.controls.name.getRawValue();
-    const bgColor = this.formGroup.controls.bgColor.getRawValue();
-    this.submitData.emit({ name, color : bgColor });
+    const name     = this.formGroup.controls.name.getRawValue();
+    const hexColor = this.formGroup.controls.hexColor.getRawValue();
+    this.submitData.emit({ name, hexColor });
   }
 
   public onClickClose()

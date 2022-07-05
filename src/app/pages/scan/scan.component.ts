@@ -93,13 +93,13 @@ export class ScanComponent implements OnInit, OnDestroy
     const cardId = result.content;
     const format = result.format;
 
-    this.openCardForm().then(async (info : { name : string, color : string }) =>
+    this.openCardForm().then(async (info : { name : string, hexColor : string }) =>
     {
       const card = new Card({
         id       : cardId,
         format   : format,
         name     : info.name,
-        hexColor : info.color
+        hexColor : info.hexColor
       });
 
       // NOTE Redirect to certificate
@@ -143,9 +143,10 @@ export class ScanComponent implements OnInit, OnDestroy
   {
     const modalRef = this.ngbModal.open(ModalWrapperComponent, { centered : true, backdrop : 'static', size: 'lg'});
     modalRef.componentInstance.component     = CardFormComponent;
-    modalRef.componentInstance.componentData = {  };
+    modalRef.componentInstance.componentData = { };
     modalRef.componentInstance.modalData     = {
-      title : this.translateService.instant('CARD')
+      title : this.translateService.instant('ADD_CARD'),
+      headerClasses : 'bg-primary text-white'
     };
     return modalRef.result;
   }

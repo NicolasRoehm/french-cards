@@ -15,7 +15,8 @@ import { Card }          from '@models/card.model';
 })
 export class HomeComponent implements OnInit
 {
-  public cards : Card[] = [];
+  public editMode : boolean = false;
+  public cards    : Card[]  = [];
 
   constructor
   (

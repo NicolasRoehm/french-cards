@@ -10,7 +10,7 @@ export const environment = {
   version         : EnvName.VERSION,
   appName         : 'AppOfCards',
   envName         : EnvName.LOCAL,
-  defaultLanguage : 'en',
+  defaultLanguage : 'fr',
 };
 
 /*

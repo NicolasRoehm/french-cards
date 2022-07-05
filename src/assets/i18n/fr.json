@@ -6,5 +6,16 @@
   "LOADING"                : "Chargement",
   "SCANNER_CAM_PERMISSION" : "Scanner requiert la permission de camera",
   "START_SCANNING"         : "Démarrer le scan",
-  "STOP_SCANNING"          : "Arrêter le scanning"
+  "STOP_SCANNING"          : "Arrêter le scanning",
+  "ADD_CARD"               : "Ajout d'une carte",
+  "EDIT_CARD"              : "Edition de la carte",
+  "DELETE_CARD"            : "Supprimer la carte",
+  "ALERT_DELETE_ENTRY"     : "Êtes-vous sûr de vouloir supprimer cette carte ?",
+  "NAME"                   : "Nom",
+  "COLOR"                  : "Couleur",
+  "SAVE"                   : "Sauvegarder",
+  "DELETE"                 : "Supprimer",
+  "CLOSE"                  : "Fermer",
+  "EDIT_MODE"              : "Mode édition",
+  "SCAN_BARCODE"           : "Scanner une carte"
 }

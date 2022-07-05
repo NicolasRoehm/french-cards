@@ -2,11 +2,22 @@
   <div class="container my-3">
 
     <!-- NOTE Navigation -->
-    <app-nav-block></app-nav-block>
+    <div class="mb-3">
+      <app-nav-block></app-nav-block>
+    </div>
 
+    <!-- NOTE Cards -->
     <ng-container *ngFor="let card of cards">
-      <app-card-block [card]="card"></app-card-block>
+      <app-card-block [card]="card" [editMode]="editMode"></app-card-block>
     </ng-container>
+
+    <!-- NOTE Edit mode -->
+    <div class="d-flex justify-content-center">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="editmode" [(ngModel)]="editMode">
+        <label class="form-check-label" for="editmode">{{ 'EDIT_MODE' | translate }}</label>
+      </div>
+    </div>
 
   </div>
 </app-page-layout>

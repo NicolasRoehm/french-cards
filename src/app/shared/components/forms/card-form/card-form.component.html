@@ -13,10 +13,10 @@
   </div>
 
   <div class="mb-3">
-    <label for="bgColor" class="form-label fw-bold text-start w-100">{{ 'BG_COLOR' | translate }}</label>
-    <input class="form-control" [style.background]="formGroup.controls.bgColor.value" [colorPicker]="formGroup.controls.bgColor.value" (colorPickerChange)="formGroup.controls.bgColor.setValue($event)"/>
+    <label for="hexColor" class="form-label fw-bold text-start w-100">{{ 'COLOR' | translate }}</label>
+    <input class="form-control" [style.background]="formGroup.controls.hexColor.value" [colorPicker]="formGroup.controls.hexColor.value" (colorPickerChange)="formGroup.controls.hexColor.setValue($event)"/>
     <!-- NOTE Errors -->
-    <div class="invalid-feedback" *ngIf="formGroup.controls.bgColor.hasError('required')">
+    <div class="invalid-feedback" *ngIf="formGroup.controls.hexColor.hasError('required')">
       {{ 'FIELD_REQUIRED' | translate }}
     </div>
   </div>
