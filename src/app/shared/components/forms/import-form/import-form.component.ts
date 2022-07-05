@@ -17,6 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastManager }     from '@blocks/toast/toast.manager';
 
 // Helpers
+import { EmitterHelper }    from '@helpers/emitter.helper';
 import { StorageHelper }    from '@helpers/storage.helper';
 
 // Models
@@ -103,6 +104,7 @@ export class ImportFormComponent implements OnInit
     }
 
     this.formSubmitLoading = false;
+    EmitterHelper.sendRefreshList();
     this.submitClose.emit();
   }
 

@@ -10,6 +10,7 @@ import { TranslateModule }            from '@ngx-translate/core';
 import { AngularSvgIconModule }       from 'angular-svg-icon';
 import { NgbModule }                  from '@ng-bootstrap/ng-bootstrap';
 import { NgxBarcodeModule }           from 'ngx-barcode';
+import { QrCodeModule }               from 'ng-qrcode';
 import { ColorPickerModule }          from 'ngx-color-picker';
 
 // Components
@@ -49,6 +50,7 @@ import { ModalWrapperDirective }     from '@directives/modal-wrapper.directive';
     AngularSvgIconModule,
     NgbModule,
     NgxBarcodeModule,
+    QrCodeModule,
     ColorPickerModule,
   ],
   declarations    :
@@ -91,6 +93,7 @@ import { ModalWrapperDirective }     from '@directives/modal-wrapper.directive';
     AngularSvgIconModule,
     NgbModule,
     NgxBarcodeModule,
+    QrCodeModule,
     ColorPickerModule,
 
     // Components

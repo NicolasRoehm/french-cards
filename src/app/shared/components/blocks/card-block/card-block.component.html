@@ -20,7 +20,8 @@
         </div>
         <!-- NOTE Back with barcode -->
         <div class="flip-card-back d-flex align-items-center">
-          <ngx-barcode class="w-100" [bc-value]="card.id" [bc-display-value]="true" [bc-format]="card.format"></ngx-barcode>
+          <ngx-barcode *ngIf="card.format !== 'QRCODE'" class="w-100" [bc-value]="card.id" [bc-display-value]="true" [bc-format]="card.format"></ngx-barcode>
+          <qr-code *ngIf="card.format === 'QRCODE'" [value]="card.id" class="mx-auto h-100 w-100"></qr-code>
         </div>
       </div>
     </div>

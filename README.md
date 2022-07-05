@@ -1,8 +1,5 @@
 # FrenchCards Mobile
 
-## TODO
-- App favicon & splash + nav logo
-
 ## Build
 - **Update application version**
   - Change the `VERSION` value in [environment.enum.ts](src/app/shared/enums/environment.enum.ts)
