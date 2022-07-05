@@ -34,6 +34,7 @@
       "@factories/*": ["src/app/shared/factories/*"],
       "@guards/*": ["src/app/shared/guards/*"],
       "@helpers/*": ["src/app/shared/helpers/*"],
+      "@app-types/*": ["src/app/shared/types/*"],
       "@models/*": ["src/app/shared/models/*"],
       "@interfaces/*": ["src/app/shared/interfaces/*"],
       "@services/*": ["src/app/shared/services/*"],

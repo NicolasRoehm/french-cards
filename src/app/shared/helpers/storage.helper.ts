@@ -25,25 +25,33 @@ export class StorageHelper
 
   // NOTE Cards
 
-  public static async addCard(card : Card) : Promise<boolean>
-  {
-    const cards = await this.getCards();
-    if (cards.find(c => c.id === card.id))
-      return false;
-    cards.push(card);
-    await this.setCards(cards);
-    return true;
-  }
-
   public static async getCards() : Promise<Card[]>
   {
-    const data = await this.getItem(StorageKey.CARDS);
-    return data ? ArrayTyper.asArray(Card, data) : [];
+    const keysResult = await Storage.keys();
+    const cardKeys   = keysResult.keys.filter((key) => key.startsWith(this.storagePrefix + StorageKey.CARD));
+
+    const jsonCards : any[] = [];
+    for (const cardKey in cardKeys)
+      jsonCards.push(await this.getItem(cardKey, false));
+
+    const cards = ArrayTyper.asArray(Card, jsonCards);
+    return cards;
   }
 
-  private static async setCards(cards : Card[]) : Promise<void>
+  public static async removeCard(id : string) : Promise<void>
   {
-    await this.setItem(StorageKey.CARDS, cards);
+    await this.removeItem(StorageKey.CARD + id);
+  }
+
+  public static async setCard(card : Card) : Promise<void>
+  {
+    await this.setItem(StorageKey.CARD + card.id, card);
+  }
+
+  public static async getCard(id : string) : Promise<Card | null>
+  {
+    const data = await this.getItem(StorageKey.CARD + id);
+    return data ? new Card(data) : null;
   }
 
   // !SECTION Methods

@@ -2,12 +2,7 @@
 import { Component }      from '@angular/core';
 import { OnInit }         from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Router }         from '@angular/router';
-
-// External modules
-
-// Internal modules
-import { ToastManager }   from '@blocks/toast/toast.manager';
+import { StorageHelper } from '@helpers/storage.helper';
 
 // Models
 import { Card }           from '@models/card.model';
@@ -20,32 +15,16 @@ import { Card }           from '@models/card.model';
 export class CardComponent implements OnInit
 {
   public isLoading  : boolean = true;
-  public cardId    !: string
-  public fromLink  !: string
-  public card      ?: Card;
+  public cardId    !: string;
+  public card      ?: Card | null;
 
-  constructor
-  (
-    private router         : Router,
-    private activatedRoute : ActivatedRoute,
-    private toastManager   : ToastManager
-  )
+  constructor(private activatedRoute : ActivatedRoute)
   {
-    // NOTE Get routing data
-    const nav = this.router.getCurrentNavigation();
-    if (nav?.extras.state)
-    {
-      this.card      = nav.extras.state as Card;
-      this.isLoading = false;
-    }
-
     // NOTE Get query parameters
     this.activatedRoute.queryParams.subscribe(async params =>
     {
-      this.cardId   = params['cardId'];
-      this.fromLink = params['fromLink'];
-      // if (!this.card)
-      //   await this.getCard();
+      this.cardId = params['cardId'];
+      this.initCard();
     });
   }
 
@@ -56,6 +35,13 @@ export class CardComponent implements OnInit
   public async ngOnInit() : Promise<void>
   {
 
+  }
+
+  private async initCard() : Promise<void>
+  {
+    const card     = await StorageHelper.getCard(this.cardId);
+    this.isLoading = false;
+    this.card      = card;
   }
 
   // -------------------------------------------------------------------------------

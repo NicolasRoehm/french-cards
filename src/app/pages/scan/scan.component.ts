@@ -92,17 +92,24 @@ export class ScanComponent implements OnInit, OnDestroy
       return;
 
     const cardId = result.content;
-    // console.log(result.content)
+    const format = result.format;
 
-    this.openCardForm().then(async _ =>
+    this.openCardForm().then(async (cardName : string) =>
     {
-      // TODO Generate barcode
+      const card = new Card({
+        id     : cardId,
+        format : format,
+        name   : cardName
+      });
 
       // NOTE Redirect to certificate
       await this.forceCloseCamera();
-      // NOTE Add search to history
-      StorageHelper.addCard(new Card({}));
-      this.router.navigate(['/card'], { queryParams : { cardId, fromLink : '/scan' }});
+
+      // NOTE Add card to storage
+      StorageHelper.setCard(card);
+
+      this.router.navigate(['/home']);
+      // this.router.navigate(['/card'], { queryParams : { cardId, fromLink : '/scan' }});
     });
   }
 

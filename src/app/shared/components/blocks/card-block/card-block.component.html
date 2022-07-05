@@ -3,6 +3,6 @@
     {{ card.name }}
   </div>
   <div class="card-body">
-    <ngx-barcode [bc-value]="card.id" [bc-display-value]="true"></ngx-barcode>
+    <ngx-barcode [bc-value]="card.id" [bc-display-value]="true" [bc-format]="card.format"></ngx-barcode>
   </div>
 </div>

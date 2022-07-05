@@ -16,8 +16,8 @@ import { Validators }   from '@angular/forms';
 export class CardFormComponent implements OnInit
 {
   @Input()  data        : any;
-  @Output() submitData  : EventEmitter<boolean> = new EventEmitter();
-  @Output() submitClose : EventEmitter<null>    = new EventEmitter();
+  @Output() submitData  : EventEmitter<string> = new EventEmitter();
+  @Output() submitClose : EventEmitter<null>   = new EventEmitter();
 
   public formSubmitLoading : boolean = false;
   public formGroup !: FormGroup<{
@@ -48,7 +48,8 @@ export class CardFormComponent implements OnInit
 
   public onClickSubmit()
   {
-
+    const name = this.formGroup.controls.name.getRawValue();
+    this.submitData.emit(name);
   }
 
   public onClickClose()

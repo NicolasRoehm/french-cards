@@ -1,4 +1,4 @@
 export enum StorageKey
 {
-  CARDS = 'Cards',
+  CARD = 'Card_',
 }
