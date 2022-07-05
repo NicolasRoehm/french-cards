@@ -1,10 +1,10 @@
 {
 	"appId": "com.frenchstack.cards",
-	"appName": "French Stack - French Cards",
+	"appName": "French Cards",
 	"webDir": "dist/french-cards",
 	"bundledWebRuntime": false,
 	"server": {
-		"url": "http://192.168.0.2:4200",
-		"cleartext": true
+		"cleartext": true,
+		"androidScheme": "https"
 	}
 }

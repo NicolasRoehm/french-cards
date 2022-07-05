@@ -9,7 +9,7 @@ let config : CapacitorConfig;
 
 const baseConfig : CapacitorConfig = {
   appId             : 'com.frenchstack.cards',
-  appName           : 'French Stack - French Cards',
+  appName           : 'French Cards',
   webDir            : 'dist/french-cards',
   bundledWebRuntime : false,
 };

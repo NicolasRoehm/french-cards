@@ -6,5 +6,5 @@ export const environment = {
   version         : EnvName.VERSION,
   appName         : 'FrenchCards',
   envName         : EnvName.PROD,
-  defaultLanguage : 'en',
+  defaultLanguage : 'fr',
 };
