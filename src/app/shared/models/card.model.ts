@@ -20,7 +20,14 @@ export class Card
     this.id       = json.id       || '';
     this.hexColor = json.hexColor || '';
     this.hslColor = json.hexColor ? StringHelper.hexToHSL(json.hexColor) : { h : 0, s : 0, l : 0 };
-    this.format   = json.format   ? json.format.replaceAll('_', '') : '';
+    this.format   = json.format   ? this.updateFormat(json.format) : '';
     this.name     = json.name     || '';
+  }
+
+  private updateFormat(format : string) : BarcodeFormat
+  {
+    if (format.startsWith('UPC'))
+      return 'UPC';
+    return format.replaceAll('_', '') as BarcodeFormat;
   }
 }

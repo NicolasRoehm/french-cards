@@ -34,7 +34,6 @@ export class StringHelper
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     if (!result)
       return { h : 0, s : 0, l : 0 };
-    console.log(result);
     let r = parseInt(result[1], 16);
     let g = parseInt(result[2], 16);
     let b = parseInt(result[3], 16);
