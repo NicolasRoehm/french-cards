@@ -1,6 +1,9 @@
 // Angular modules
-import { Component } from '@angular/core';
-import { OnInit }    from '@angular/core';
+import { Component }        from '@angular/core';
+import { OnInit }           from '@angular/core';
+
+// External modules
+import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 
 @Component({
   selector    : 'app-root',
@@ -18,7 +21,9 @@ export class AppComponent implements OnInit
 
   public async ngOnInit() : Promise<void>
   {
-
+    await ScreenBrightness.setBrightness({
+      brightness : 1
+    });
   }
 
   // -------------------------------------------------------------------------------
