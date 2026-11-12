@@ -37,7 +37,8 @@ export class BarcodeComponent {
         bcid,
         text: this.value(),
         scale: 3,
-        height: matrix ? undefined : 22,
+        // bwip-js rejette `height: undefined` : l'option ne doit exister que pour les codes 1D.
+        ...(matrix ? {} : { height: 22 }),
         // Chiffres affichés en HTML sous le code : le texte bwip-js chevauche les barres (EAN/UPC).
         includetext: false,
         paddingwidth: matrix ? 2 : 6,
