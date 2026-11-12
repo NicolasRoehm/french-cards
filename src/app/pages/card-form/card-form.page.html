@@ -1,0 +1,57 @@
+<app-top-bar [title]="editing() ? 'Modifier la carte' : 'Nouvelle carte'" [back]="true" />
+
+<form class="page" (submit)="save($event)">
+  <div class="preview" [style.--card]="color()" [style.color]="ink()">
+    <strong>{{ name() || 'Nom de l’enseigne' }}</strong>
+    @if (number()) {
+      <div class="preview-code">
+        <app-barcode [value]="number()" [format]="codeFormat()" [showText]="false" />
+      </div>
+    }
+  </div>
+
+  <label class="field">
+    <span>Enseigne</span>
+    <input type="text" placeholder="Carrefour, Decathlon…" autocomplete="off" autocapitalize="words" required
+      [value]="name()" (input)="name.set(text($event))" />
+  </label>
+
+  <label class="field">
+    <span>Numéro de carte</span>
+    <div class="row">
+      <input type="text" inputmode="text" placeholder="Le numéro sous le code-barres" autocomplete="off" required
+        [value]="number()" (input)="number.set(text($event))" />
+      <button type="button" class="ghost" (click)="rescan()">Scanner</button>
+    </div>
+  </label>
+
+  <label class="field">
+    <span>Type de code</span>
+    <select [value]="codeFormat()" (change)="codeFormat.set(text($event))">
+      @if (!knownFormat()) {
+        <option [value]="codeFormat()">{{ codeFormat() }} (détecté)</option>
+      }
+      @for (option of formats; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  </label>
+
+  <fieldset class="field">
+    <legend>Couleur</legend>
+    <div class="swatches">
+      @for (swatch of palette; track swatch) {
+        <button type="button" class="swatch" [style.background]="swatch" [class.active]="swatch === color()"
+          [attr.aria-label]="'Couleur ' + swatch" (click)="color.set(swatch)"></button>
+      }
+      <label class="swatch custom" [style.background]="color()" aria-label="Couleur personnalisée">
+        <input type="color" [value]="color()" (input)="color.set(text($event))" />
+        +
+      </label>
+    </div>
+  </fieldset>
+
+  <button type="submit" class="submit" [disabled]="!canSave()">
+    {{ editing() ? 'Enregistrer' : 'Ajouter la carte' }}
+  </button>
+</form>

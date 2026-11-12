@@ -1,0 +1,37 @@
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 1.586;
+  padding: 14px;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgb(255 255 255 / 0.22), transparent 60%),
+    var(--card);
+  box-shadow: 0 6px 16px -8px rgb(0 0 0 / 0.45);
+  transition: transform 0.15s ease;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.initial {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0.18;
+}
+
+.name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}

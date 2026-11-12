@@ -1,0 +1,64 @@
+<app-top-bar title="Transférer mes cartes" [back]="true" />
+
+<main class="page">
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" [class.active]="tab() === 'receive'" [attr.aria-selected]="tab() === 'receive'"
+      (click)="tab.set('receive')">Recevoir</button>
+    <button type="button" role="tab" [class.active]="tab() === 'send'" [attr.aria-selected]="tab() === 'send'"
+      (click)="tab.set('send')">Envoyer</button>
+  </div>
+
+  @if (tab() === 'send') {
+    @if (!store.cards().length) {
+      <p class="muted center">Aucune carte à envoyer.</p>
+    } @else {
+      <section class="panel">
+        <h2>1. Montre ce QR code au nouveau téléphone</h2>
+        <p class="muted">Sur l’autre téléphone : <strong>Transférer → Recevoir → Scanner le QR code</strong>. Les {{ store.cards().length }} cartes arrivent d’un coup.</p>
+        @if (payload.value(); as code) {
+          @if (code.length <= maxQrLength) {
+            <div class="qr"><app-barcode [value]="code" format="QRCODE" /></div>
+          } @else {
+            <p class="warn">Trop de cartes pour un seul QR code : utilise plutôt le fichier ci-dessous.</p>
+          }
+        }
+      </section>
+
+      <section class="panel">
+        <h2>Ou envoie un fichier de sauvegarde</h2>
+        <p class="muted">Quick Share, mail, Drive… Pratique aussi pour garder une sauvegarde.</p>
+        <button type="button" class="btn" (click)="shareFile()">Partager le fichier de sauvegarde</button>
+      </section>
+    }
+  } @else {
+    <section class="panel">
+      <h2>Depuis un téléphone qui a cette version</h2>
+      <p class="muted">Sur l’ancien téléphone : <strong>Transférer → Envoyer</strong>, puis scanne le QR code affiché.</p>
+      <button type="button" class="btn primary" (click)="flow.scan()">Scanner le QR code</button>
+    </section>
+
+    <section class="panel">
+      <h2>Depuis un fichier de sauvegarde</h2>
+      <label class="btn">
+        Choisir le fichier
+        <input type="file" accept="application/json,.json,text/plain" (change)="importFile($event)" />
+      </label>
+    </section>
+
+    <section class="panel">
+      <h2>Depuis l’ancienne version de l’app</h2>
+      <ol class="muted steps">
+        <li>Sur l’ancien téléphone : active le <strong>Mode édition</strong>, puis <strong>Exporter les cartes → Copier les cartes</strong>.</li>
+        <li>Envoie-toi le texte copié (Quick Share, WhatsApp, mail…).</li>
+        <li>Ici, copie ce texte puis appuie sur le bouton.</li>
+      </ol>
+      <button type="button" class="btn" (click)="pasteClipboard()">Coller depuis le presse-papiers</button>
+      <details>
+        <summary>Coller à la main</summary>
+        <textarea rows="5" placeholder="[{&quot;id&quot;:&quot;…&quot;,&quot;name&quot;:&quot;…&quot;}]" [value]="pasted()"
+          (input)="pasted.set(text($event))"></textarea>
+        <button type="button" class="btn" [disabled]="!pasted().trim()" (click)="importPasted()">Importer</button>
+      </details>
+    </section>
+  }
+</main>

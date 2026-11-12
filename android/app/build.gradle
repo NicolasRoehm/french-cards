@@ -1,22 +1,40 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    namespace = "com.frenchstack.cards"
+    compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.frenchstack.cards"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 100000
-        versionName "1.0.0"
+        // 4.0.0 → 400000, + numéro du run CI pour que chaque APK mette à jour le précédent
+        versionCode 400000 + (System.getenv("GITHUB_RUN_NUMBER") ?: "0").toInteger()
+        versionName "4.0." + (System.getenv("GITHUB_RUN_NUMBER") ?: "0")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
-            ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    signingConfigs {
+        release {
+            // Fournis par la CI (secrets GitHub) ou par android/keystore.properties en local
+            def props = new Properties()
+            def propsFile = rootProject.file("keystore.properties")
+            if (propsFile.exists()) propsFile.withInputStream { props.load(it) }
+            def storePath = System.getenv("ANDROID_KEYSTORE_PATH") ?: props.getProperty("storeFile")
+            if (storePath) {
+                storeFile file(storePath)
+                storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD") ?: props.getProperty("storePassword")
+                keyAlias System.getenv("ANDROID_KEY_ALIAS") ?: props.getProperty("keyAlias")
+                keyPassword System.getenv("ANDROID_KEY_PASSWORD") ?: props.getProperty("keyPassword")
+            }
         }
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.release.storeFile ? signingConfigs.release : signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -32,6 +50,8 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
     implementation project(':capacitor-android')
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"

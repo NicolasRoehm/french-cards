@@ -1,0 +1,21 @@
+@if (card(); as card) {
+  <div class="screen" [style.--card]="card.color" [style.color]="ink()">
+    <header class="head">
+      <a class="round" routerLink="/" aria-label="Retour">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+      </a>
+      <h1>{{ card.name }}</h1>
+      <a class="round" [routerLink]="['/card', card.id, 'edit']" aria-label="Modifier">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16zM14 6l4 4" /></svg>
+      </a>
+    </header>
+
+    <section class="code">
+      <app-barcode [value]="card.value" [format]="card.format" />
+    </section>
+
+    <p class="tip">Présente cet écran en caisse — la luminosité est poussée au maximum.</p>
+
+    <button type="button" class="delete" (click)="remove()">Supprimer la carte</button>
+  </div>
+}

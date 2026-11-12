@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+
+.barcode {
+  display: flex;
+  justify-content: center;
+
+  ::ng-deep svg {
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+  }
+
+  &.matrix ::ng-deep svg {
+    width: min(100%, 70vw);
+  }
+}
+
+.error {
+  margin: 0;
+  text-align: center;
+  color: #6b7280;
+  overflow-wrap: anywhere;
+}

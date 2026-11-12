@@ -1,0 +1,39 @@
+<app-top-bar title="French Cards">
+  <a class="bar-action" routerLink="/transfer" aria-label="Transférer mes cartes">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3" /></svg>
+    <span>Transférer</span>
+  </a>
+</app-top-bar>
+
+<main class="page">
+  @if (store.cards().length > 5) {
+    <input class="search" type="search" placeholder="Rechercher une carte" aria-label="Rechercher une carte"
+      [value]="query()" (input)="query.set($any($event.target).value)" />
+  }
+
+  @if (store.cards().length) {
+    <div class="grid">
+      @for (card of visible(); track card.id) {
+        <app-card-tile [card]="card" />
+      } @empty {
+        <p class="hint">Aucune carte ne correspond à « {{ query() }} ».</p>
+      }
+    </div>
+  } @else {
+    <section class="empty">
+      <h2>Aucune carte pour l’instant</h2>
+      <p>Scanne le code-barres d’une carte de fidélité pour l’ajouter.</p>
+      <p>Tu changes de téléphone ? <a routerLink="/transfer">Récupère tes cartes</a> en 10 secondes.</p>
+    </section>
+  }
+</main>
+
+<div class="actions">
+  <a class="secondary" routerLink="/card/new" aria-label="Saisir une carte à la main">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16zM14 6l4 4" /></svg>
+  </a>
+  <button type="button" class="primary" (click)="flow.scan()">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8" /></svg>
+    Scanner une carte
+  </button>
+</div>
